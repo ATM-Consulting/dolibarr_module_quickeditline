@@ -18,20 +18,20 @@
  */
 
 /**
- * 	\defgroup   quickcustomerprice     Module quickcustomerprice
+ * 	\defgroup   quickeditline     Module quickeditline
  *  \brief      Example of a module descriptor.
- *				Such a file must be copied into htdocs/quickcustomerprice/core/modules directory.
- *  \file       htdocs/quickcustomerprice/core/modules/modquickcustomerprice.class.php
- *  \ingroup    quickcustomerprice
- *  \brief      Description and activation file for module quickcustomerprice
+ *				Such a file must be copied into htdocs/quickeditline/core/modules directory.
+ *  \file       htdocs/quickeditline/core/modules/modquickeditline.class.php
+ *  \ingroup    quickeditline
+ *  \brief      Description and activation file for module quickeditline
  */
 include_once DOL_DOCUMENT_ROOT .'/core/modules/DolibarrModules.class.php';
 
 
 /**
- *  Description and activation class for module quickcustomerprice
+ *  Description and activation class for module quickeditline
  */
-class modquickcustomerprice extends DolibarrModules
+class modquickeditline extends DolibarrModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -49,7 +49,7 @@ class modquickcustomerprice extends DolibarrModules
 		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
 		$this->numero = 104874; // 104000 to 104999 for ATM CONSULTING
 		// Key text used to identify module (for permissions, menus, etc...)
-		$this->rights_class = 'quickcustomerprice';
+		$this->rights_class = 'quickeditline';
 
 		// Family can be 'crm','financial','hr','projects','products','ecm','technic','other'
 		// It is used to group modules in module setup page
@@ -57,7 +57,7 @@ class modquickcustomerprice extends DolibarrModules
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
 		$this->name = preg_replace('/^mod/i','',get_class($this));
 		// Module description, used if translation string 'ModuleXXXDesc' not found (where XXX is value of numeric property 'numero' of module)
-		$this->description = "Description of module quickcustomerprice";
+		$this->description = "Description of module quickeditline";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
 		$this->version = '4.0.0';
 		// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)
@@ -67,12 +67,12 @@ class modquickcustomerprice extends DolibarrModules
 		// Name of image file used for this module.
 		// If file is in theme/yourtheme/img directory under name object_pictovalue.png, use this->picto='pictovalue'
 		// If file is in module/img directory under name object_pictovalue.png, use this->picto='pictovalue@module'
-		$this->picto='quickcustomerprice@quickcustomerprice';
+		$this->picto='quickeditline@quickeditline';
 
 		// Defined all module parts (triggers, login, substitutions, menus, css, etc...)
-		// for default path (eg: /quickcustomerprice/core/xxxxx) (0=disable, 1=enable)
-		// for specific path of parts (eg: /quickcustomerprice/core/modules/barcode)
-		// for specific css file (eg: /quickcustomerprice/css/quickcustomerprice.css.php)
+		// for default path (eg: /quickeditline/core/xxxxx) (0=disable, 1=enable)
+		// for specific path of parts (eg: /quickeditline/core/modules/barcode)
+		// for specific css file (eg: /quickeditline/css/quickeditline.css.php)
 		//$this->module_parts = array(
 		//                        	'triggers' => 0,                                 	// Set this to 1 if module has its own trigger directory (core/triggers)
 		//							'login' => 0,                                    	// Set this to 1 if module has its own login method directory (core/login)
@@ -82,22 +82,22 @@ class modquickcustomerprice extends DolibarrModules
 		//                        	'tpl' => 0,                                      	// Set this to 1 if module overwrite template dir (core/tpl)
 		//							'barcode' => 0,                                  	// Set this to 1 if module has its own barcode directory (core/modules/barcode)
 		//							'models' => 0,                                   	// Set this to 1 if module has its own models directory (core/modules/xxx)
-		//							'css' => array('/quickcustomerprice/css/quickcustomerprice.css.php'),	// Set this to relative path of css file if module has its own css file
-	 	//							'js' => array('/quickcustomerprice/js/quickcustomerprice.js'),          // Set this to relative path of js file if module must load a js on all pages
+		//							'css' => array('/quickeditline/css/quickeditline.css.php'),	// Set this to relative path of css file if module has its own css file
+	 	//							'js' => array('/quickeditline/js/quickeditline.js'),          // Set this to relative path of js file if module must load a js on all pages
 		//							'hooks' => array('hookcontext1','hookcontext2')  	// Set here all hooks context managed by module
 		//							'dir' => array('output' => 'othermodulename'),      // To force the default directories names
-		//							'workflow' => array('WORKFLOW_MODULE1_YOURACTIONTYPE_MODULE2'=>array('enabled'=>'! empty($conf->module1->enabled) && ! empty($conf->module2->enabled)', 'picto'=>'yourpicto@quickcustomerprice')) // Set here all workflow context managed by module
+		//							'workflow' => array('WORKFLOW_MODULE1_YOURACTIONTYPE_MODULE2'=>array('enabled'=>'! empty($conf->module1->enabled) && ! empty($conf->module2->enabled)', 'picto'=>'yourpicto@quickeditline')) // Set here all workflow context managed by module
 		//                        );
 		$this->module_parts = array(
 			'hooks'=>array('propalcard','invoicecard','ordercard', 'ordersuppliercard', 'invoicesuppliercard', 'supplier_proposalcard')
 		);
 
 		// Data directories to create when module is enabled.
-		// Example: this->dirs = array("/quickcustomerprice/temp");
+		// Example: this->dirs = array("/quickeditline/temp");
 		$this->dirs = array();
 
-		// Config pages. Put here list of php page, stored into quickcustomerprice/admin directory, to use to setup module.
-//		$this->config_page_url = array('quickcustomerprice_setup.php@quickcustomerprice');
+		// Config pages. Put here list of php page, stored into quickeditline/admin directory, to use to setup module.
+//		$this->config_page_url = array('quickeditline_setup.php@quickeditline');
 
 		// Dependencies
 		$this->hidden = false;			// A condition to hide module
@@ -106,7 +106,7 @@ class modquickcustomerprice extends DolibarrModules
 		$this->conflictwith = array();	// List of modules id this module is in conflict with
 		$this->phpmin = array(5,0);					// Minimum version of PHP required by module
 		$this->need_dolibarr_version = array(3,7);	// Minimum version of Dolibarr required by module
-		$this->langfiles = array("quickcustomerprice@quickcustomerprice");
+		$this->langfiles = array("quickeditline@quickeditline");
 
 		// Constants
 		// List of particular constants to add when module is enabled (key, 'chaine', value, desc, visible, 'current' or 'allentities', deleteonunactive)
@@ -116,8 +116,8 @@ class modquickcustomerprice extends DolibarrModules
 		$this->const = array();
 
 		// Array to add new pages in new tabs
-		// Example: $this->tabs = array('objecttype:+tabname1:Title1:mylangfile@quickcustomerprice:$user->rights->quickcustomerprice->read:/quickcustomerprice/mynewtab1.php?id=__ID__',  	// To add a new tab identified by code tabname1
-        //                              'objecttype:+tabname2:Title2:mylangfile@quickcustomerprice:$user->rights->othermodule->read:/quickcustomerprice/mynewtab2.php?id=__ID__',  	// To add another new tab identified by code tabname2
+		// Example: $this->tabs = array('objecttype:+tabname1:Title1:mylangfile@quickeditline:$user->rights->quickeditline->read:/quickeditline/mynewtab1.php?id=__ID__',  	// To add a new tab identified by code tabname1
+        //                              'objecttype:+tabname2:Title2:mylangfile@quickeditline:$user->rights->othermodule->read:/quickeditline/mynewtab2.php?id=__ID__',  	// To add another new tab identified by code tabname2
         //                              'objecttype:-tabname:NU:conditiontoremove');                                                     						// To remove an existing tab identified by code tabname
 		// where objecttype can be
 		// 'categories_x'	  to add a tab in category view (replace 'x' by type of category (0=product, 1=supplier, 2=customer, 3=member)
@@ -142,16 +142,16 @@ class modquickcustomerprice extends DolibarrModules
         $this->tabs = array();
 
         // Dictionaries
-	    if (! isset($conf->quickcustomerprice->enabled))
+	    if (! isset($conf->quickeditline->enabled))
         {
-        	$conf->quickcustomerprice=new stdClass();
-        	$conf->quickcustomerprice->enabled=0;
+        	$conf->quickeditline=new stdClass();
+        	$conf->quickeditline->enabled=0;
         }
 		$this->dictionaries=array();
         /* Example:
-        if (! isset($conf->quickcustomerprice->enabled)) $conf->quickcustomerprice->enabled=0;	// This is to avoid warnings
+        if (! isset($conf->quickeditline->enabled)) $conf->quickeditline->enabled=0;	// This is to avoid warnings
         $this->dictionaries=array(
-            'langs'=>'mylangfile@quickcustomerprice',
+            'langs'=>'mylangfile@quickeditline',
             'tabname'=>array(MAIN_DB_PREFIX."table1",MAIN_DB_PREFIX."table2",MAIN_DB_PREFIX."table3"),		// List of tables we want to see into dictonnary editor
             'tablib'=>array("Table1","Table2","Table3"),													// Label of tables
             'tabsql'=>array('SELECT f.rowid as rowid, f.code, f.label, f.active FROM '.MAIN_DB_PREFIX.'table1 as f','SELECT f.rowid as rowid, f.code, f.label, f.active FROM '.MAIN_DB_PREFIX.'table2 as f','SELECT f.rowid as rowid, f.code, f.label, f.active FROM '.MAIN_DB_PREFIX.'table3 as f'),	// Request to select fields
@@ -160,7 +160,7 @@ class modquickcustomerprice extends DolibarrModules
             'tabfieldvalue'=>array("code,label","code,label","code,label"),																				// List of fields (list of fields to edit a record)
             'tabfieldinsert'=>array("code,label","code,label","code,label"),																			// List of fields (list of fields for insert)
             'tabrowid'=>array("rowid","rowid","rowid"),																									// Name of columns with primary key (try to always name it 'rowid')
-            'tabcond'=>array($conf->quickcustomerprice->enabled,$conf->quickcustomerprice->enabled,$conf->quickcustomerprice->enabled)												// Condition to show each dictionary
+            'tabcond'=>array($conf->quickeditline->enabled,$conf->quickeditline->enabled,$conf->quickeditline->enabled)												// Condition to show each dictionary
         );
         */
 
@@ -192,14 +192,14 @@ class modquickcustomerprice extends DolibarrModules
 		// Example to declare a new Top Menu entry and its Left menu entry:
 		// $this->menu[$r]=array(	'fk_menu'=>0,			                // Put 0 if this is a top menu
 		//							'type'=>'top',			                // This is a Top menu entry
-		//							'titre'=>'quickcustomerprice top menu',
-		//							'mainmenu'=>'quickcustomerprice',
-		//							'leftmenu'=>'quickcustomerprice',
-		//							'url'=>'/quickcustomerprice/pagetop.php',
-		//							'langs'=>'mylangfile@quickcustomerprice',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+		//							'titre'=>'quickeditline top menu',
+		//							'mainmenu'=>'quickeditline',
+		//							'leftmenu'=>'quickeditline',
+		//							'url'=>'/quickeditline/pagetop.php',
+		//							'langs'=>'mylangfile@quickeditline',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
 		//							'position'=>100,
-		//							'enabled'=>'$conf->quickcustomerprice->enabled',	// Define condition to show or hide menu entry. Use '$conf->quickcustomerprice->enabled' if entry must be visible if module is enabled.
-		//							'perms'=>'1',			                // Use 'perms'=>'$user->rights->quickcustomerprice->level1->level2' if you want your menu with a permission rules
+		//							'enabled'=>'$conf->quickeditline->enabled',	// Define condition to show or hide menu entry. Use '$conf->quickeditline->enabled' if entry must be visible if module is enabled.
+		//							'perms'=>'1',			                // Use 'perms'=>'$user->rights->quickeditline->level1->level2' if you want your menu with a permission rules
 		//							'target'=>'',
 		//							'user'=>2);				                // 0=Menu for internal users, 1=external users, 2=both
 		// $r++;
@@ -207,14 +207,14 @@ class modquickcustomerprice extends DolibarrModules
 		// Example to declare a Left Menu entry into an existing Top menu entry:
 		// $this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=xxx',		    // Use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
 		//							'type'=>'left',			                // This is a Left menu entry
-		//							'titre'=>'quickcustomerprice left menu',
+		//							'titre'=>'quickeditline left menu',
 		//							'mainmenu'=>'xxx',
-		//							'leftmenu'=>'quickcustomerprice',
-		//							'url'=>'/quickcustomerprice/pagelevel2.php',
-		//							'langs'=>'mylangfile@quickcustomerprice',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+		//							'leftmenu'=>'quickeditline',
+		//							'url'=>'/quickeditline/pagelevel2.php',
+		//							'langs'=>'mylangfile@quickeditline',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
 		//							'position'=>100,
-		//							'enabled'=>'$conf->quickcustomerprice->enabled',  // Define condition to show or hide menu entry. Use '$conf->quickcustomerprice->enabled' if entry must be visible if module is enabled. Use '$leftmenu==\'system\'' to show if leftmenu system is selected.
-		//							'perms'=>'1',			                // Use 'perms'=>'$user->rights->quickcustomerprice->level1->level2' if you want your menu with a permission rules
+		//							'enabled'=>'$conf->quickeditline->enabled',  // Define condition to show or hide menu entry. Use '$conf->quickeditline->enabled' if entry must be visible if module is enabled. Use '$leftmenu==\'system\'' to show if leftmenu system is selected.
+		//							'perms'=>'1',			                // Use 'perms'=>'$user->rights->quickeditline->level1->level2' if you want your menu with a permission rules
 		//							'target'=>'',
 		//							'user'=>2);				                // 0=Menu for internal users, 1=external users, 2=both
 		// $r++;
@@ -252,10 +252,10 @@ class modquickcustomerprice extends DolibarrModules
 
 		define('INC_FROM_DOLIBARR',true);
 
-		dol_include_once('/quickcustomerprice/config.php');
-		dol_include_once('/quickcustomerprice/script/create-maj-base.php');
+		dol_include_once('/quickeditline/config.php');
+		dol_include_once('/quickeditline/script/create-maj-base.php');
 
-		$result=$this->_load_tables('/quickcustomerprice/sql/');
+		$result=$this->_load_tables('/quickeditline/sql/');
 
 		return $this->_init($sql, $options);
 	}

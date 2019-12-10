@@ -18,7 +18,7 @@
 
 /**
  * 	\file		admin/about.php
- * 	\ingroup	quickcustomerprice
+ * 	\ingroup	quickeditline
  * 	\brief		This file is an example about page
  * 				Put some comments here
  */
@@ -30,10 +30,10 @@ if (! $res) {
 
 // Libraries
 require_once DOL_DOCUMENT_ROOT . "/core/lib/admin.lib.php";
-require_once '../lib/quickcustomerprice.lib.php';
+require_once '../lib/quickeditline.lib.php';
 
 // Translations
-$langs->load("quickcustomerprice@quickcustomerprice");
+$langs->load("quickeditline@quickeditline");
 
 // Access control
 if (! $user->admin) {
@@ -43,7 +43,7 @@ if (! $user->admin) {
 /*
  * View
  */
-$page_name = "quickcustomerpriceAbout";
+$page_name = "quickeditlineAbout";
 llxHeader('', $langs->trans($page_name));
 
 // Subheader
@@ -52,13 +52,13 @@ $linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'
 print_fiche_titre($langs->trans($page_name), $linkback);
 
 // Configuration header
-$head = quickcustomerpriceAdminPrepareHead();
+$head = quickeditlineAdminPrepareHead();
 dol_fiche_head(
     $head,
     'about',
     $langs->trans("Module104874Name"),
     0,
-    'quickcustomerprice@quickcustomerprice'
+    'quickeditline@quickeditline'
 );
 
 // About page goes here

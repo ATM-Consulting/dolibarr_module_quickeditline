@@ -17,26 +17,26 @@
  */
 
 /**
- *	\file		lib/quickcustomerprice.lib.php
- *	\ingroup	quickcustomerprice
+ *	\file		lib/quickeditline.lib.php
+ *	\ingroup	quickeditline
  *	\brief		This file is an example module library
  *				Put some comments here
  */
 
-function quickcustomerpriceAdminPrepareHead()
+function quickeditlineAdminPrepareHead()
 {
     global $langs, $conf;
 
-    $langs->load("quickcustomerprice@quickcustomerprice");
+    $langs->load("quickeditline@quickeditline");
 
     $h = 0;
     $head = array();
 
-    $head[$h][0] = dol_buildpath("/quickcustomerprice/admin/quickcustomerprice_setup.php", 1);
+    $head[$h][0] = dol_buildpath("/quickeditline/admin/quickeditline_setup.php", 1);
     $head[$h][1] = $langs->trans("Parameters");
     $head[$h][2] = 'settings';
     $h++;
-    $head[$h][0] = dol_buildpath("/quickcustomerprice/admin/quickcustomerprice_about.php", 1);
+    $head[$h][0] = dol_buildpath("/quickeditline/admin/quickeditline_about.php", 1);
     $head[$h][1] = $langs->trans("About");
     $head[$h][2] = 'about';
     $h++;
@@ -44,12 +44,12 @@ function quickcustomerpriceAdminPrepareHead()
     // Show more tabs from modules
     // Entries must be declared in modules descriptor with line
     //$this->tabs = array(
-    //	'entity:+tabname:Title:@quickcustomerprice:/quickcustomerprice/mypage.php?id=__ID__'
+    //	'entity:+tabname:Title:@quickeditline:/quickeditline/mypage.php?id=__ID__'
     //); // to add new tab
     //$this->tabs = array(
-    //	'entity:-tabname:Title:@quickcustomerprice:/quickcustomerprice/mypage.php?id=__ID__'
+    //	'entity:-tabname:Title:@quickeditline:/quickeditline/mypage.php?id=__ID__'
     //); // to remove a tab
-    complete_head_from_modules($conf, $langs, $object, $head, $h, 'quickcustomerprice');
+    complete_head_from_modules($conf, $langs, $object, $head, $h, 'quickeditline');
 
     return $head;
 }

@@ -17,16 +17,16 @@
  */
 
 /**
- * \file    class/actions_quickcustomerprice.class.php
- * \ingroup quickcustomerprice
+ * \file    class/actions_quickeditline.class.php
+ * \ingroup quickeditline
  * \brief   This file is an example hook overload class file
  *          Put some comments here
  */
 
 /**
- * Class Actionsquickcustomerprice
+ * Class Actionsquickeditline
  */
-class Actionsquickcustomerprice
+class Actionsquickeditline
 {
     /**
      * @var array Hook results. Propagated to $hookmanager->resArray for later reuse
