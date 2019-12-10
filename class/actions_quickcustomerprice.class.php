@@ -68,10 +68,11 @@ class Actionsquickcustomerprice
     }
 
     /**
-     * @param $parameters
-     * @param $object
-     * @param $action
-     * @param $hookmanager
+     * @param array $parameters array of parameters
+     * @param Propal|Commande|Facture|SupplierProposal|CommandeFournisseur|FactureFournisseur $object object
+     * @param string $action action
+     * @param HookManager $hookmanager object
+     * @return void
      */
     public function printCommonFooter($parameters, &$object, &$action, $hookmanager)
     {
@@ -82,10 +83,64 @@ class Actionsquickcustomerprice
 
         if (in_array($parameters['currentcontext'], $enabledContexts)) {
             ?>
+            <style type="text/css">
+                #tablelines tr[id^=row-] .linecoldescription:hover,
+                #tablelines tr[id^=row-] .linecolvat:hover,
+                #tablelines tr[id^=row-] .linecoluht:hover,
+                #tablelines tr[id^=row-] .linecolqty:hover,
+                #tablelines tr[id^=row-] .linecoldiscount:hover,
+                #tablelines tr[id^=row-] .linecolmargin1:hover,
+                #tablelines tr[id^=row-] .linecolmargin2:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            </style>
             <script type="text/javascript">
                 $(function () {
+                    // Gestion de l'auto focus des éléments
+                    var focus = function (params) {
+                        if (typeof params.id !== 'undefined' && params.id.length > 0)
+                        {
+                            if (params.element === 'linecoldescription' && typeof CKEDITOR === 'object')
+                            {
+                                CKEDITOR.on("instanceReady",function() {
+                                    CKEDITOR.instances[params.id].focus();
+                                });
+                            }
+                            else if (params.element === 'linecolvat') $('#'+params.id).focus();
+                            else $('#'+params.id).select();
+                        }
+                        else if (typeof params.name !== 'undefined' && params.name.length > 0)
+                        {
+                            $('input[name='+params.name+']').select();
+                        }
+                    };
+
+                    $(document).on('click', '#tablelines tr[id^=row-] .linecoldescription', function (ev) {
+                        // Ici je veux que ce soit uniquement le td pour ne pas entrer en conflit avec le module Nomenclature
+                        if ($(ev.target).hasClass('linecoldescription')) $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecoldescription', id: 'product_desc'}]);
+                    });
+                    $(document).on('click', '#tablelines tr[id^=row-] .linecolvat', function (ev) {
+                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecolvat', id: 'tva_tx'}]);
+                    });
+                    $(document).on('click', '#tablelines tr[id^=row-] .linecoluht', function (ev) {
+                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecoluht', id: 'price_ht'}])
+                    });
+                    $(document).on('click', '#tablelines tr[id^=row-] .linecolqty', function (ev) {
+                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecolqty', id: 'qty'}])
+                    });
+                    $(document).on('click', '#tablelines tr[id^=row-] .linecoldiscount', function (ev) {
+                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecoldiscount', id: 'remise_percent'}])
+                    });
+                    $(document).on('click', '#tablelines tr[id^=row-] .linecolmargin1', function (ev) {
+                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecolmargin1', id: 'buying_price'}])
+                    });
+                    $(document).on('click', '#tablelines tr[id^=row-] .linecolmargin2', function (ev) {
+                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecolmargin2', name: 'np_marginRate'}])
+                    });
+
                     let qlu_in_edition = false;
-                    $(document).on('click', '#tablelines tr[id^=row-] td.linecoledit a', function (ev) {
+                    $(document).on('click', '#tablelines tr[id^=row-] td.linecoledit a', function (ev, callback, callback_params) {
                         ev.preventDefault();
                         // let self = this;
                         if (qlu_in_edition) return;
@@ -134,6 +189,12 @@ class Actionsquickcustomerprice
 
                             $('#addproduct').submit(submitForm);
                             // $('#cancellinebutton').click(cancelEdit);
+
+                            if (typeof callback === 'function')
+                            {
+                                callback(callback_params);
+                            }
+
                         }, 'html');
                     });
                 });
