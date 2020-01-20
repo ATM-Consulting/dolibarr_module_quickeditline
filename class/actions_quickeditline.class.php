@@ -118,25 +118,25 @@ class Actionsquickeditline
 
                     $(document).on('click', '#tablelines tr[id^=row-] .linecoldescription', function (ev) {
                         // Ici je veux que ce soit uniquement le td pour ne pas entrer en conflit avec le module Nomenclature
-                        if ($(ev.target).hasClass('linecoldescription')) $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecoldescription', id: 'product_desc'}]);
+                        if ($(ev.target).hasClass('linecoldescription')) $(this).siblings('.linecoledit').children('a').not('[name*="duplicate"]').trigger('click', [focus, {element: 'linecoldescription', id: 'product_desc'}]);
                     });
                     $(document).on('click', '#tablelines tr[id^=row-] .linecolvat', function (ev) {
-                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecolvat', id: 'tva_tx'}]);
+                        $(this).siblings('.linecoledit').children('a').not('[name*="duplicate"]').trigger('click', [focus, {element: 'linecolvat', id: 'tva_tx'}]);
                     });
                     $(document).on('click', '#tablelines tr[id^=row-] .linecoluht', function (ev) {
-                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecoluht', id: 'price_ht'}])
+                        $(this).siblings('.linecoledit').children('a').not('[name*="duplicate"]').trigger('click', [focus, {element: 'linecoluht', id: 'price_ht'}])
                     });
                     $(document).on('click', '#tablelines tr[id^=row-] .linecolqty', function (ev) {
-                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecolqty', id: 'qty'}])
+                        $(this).siblings('.linecoledit').children('a').not('[name*="duplicate"]').trigger('click', [focus, {element: 'linecolqty', id: 'qty'}])
                     });
                     $(document).on('click', '#tablelines tr[id^=row-] .linecoldiscount', function (ev) {
-                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecoldiscount', id: 'remise_percent'}])
+                        $(this).siblings('.linecoledit').children('a').not('[name*="duplicate"]').trigger('click', [focus, {element: 'linecoldiscount', id: 'remise_percent'}])
                     });
                     $(document).on('click', '#tablelines tr[id^=row-] .linecolmargin1', function (ev) {
-                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecolmargin1', id: 'buying_price'}])
+                        $(this).siblings('.linecoledit').children('a').not('[name*="duplicate"]').trigger('click', [focus, {element: 'linecolmargin1', id: 'buying_price'}])
                     });
                     $(document).on('click', '#tablelines tr[id^=row-] .linecolmargin2', function (ev) {
-                        $(this).siblings('.linecoledit').children('a').trigger('click', [focus, {element: 'linecolmargin2', name: 'np_marginRate'}])
+                        $(this).siblings('.linecoledit').children('a').not('[name*="duplicate"]').trigger('click', [focus, {element: 'linecolmargin2', name: 'np_marginRate'}])
                     });
 
                     let qlu_in_edition = false;
