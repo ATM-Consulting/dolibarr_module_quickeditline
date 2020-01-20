@@ -155,6 +155,7 @@ class Actionsquickeditline
 
                             let submitForm = function (ev) {
                                 ev.preventDefault();
+                                let CKEDITOR = window.CKEDITOR || { instances: [] };
                                 for (let ckeName in CKEDITOR.instances) {
                                     if (CKEDITOR.instances.hasOwnProperty(ckeName)) {
                                         let ckeInstance = CKEDITOR.instances[ckeName];
@@ -164,7 +165,7 @@ class Actionsquickeditline
                                     }
                                 }
                                 let submitData = $(this).serializeArray();
-                                if (ev.originalEvent.explicitOriginalTarget.name === 'cancel') {
+                                if (getClickedSubmitBtn(ev.originalEvent.currentTarget).attr('name') === 'cancel') {
                                     return cancelSubmit(ev);
                                 }
 
@@ -187,6 +188,18 @@ class Actionsquickeditline
                                 qlu_in_edition = false;
                             };
 
+                            let setClickedSubmitBtn = function(ev) {
+                                // reset the clicked status on both form submit buttons
+                                $('#savelinebutton').attr('clicked', false);
+                                $('#cancellinebutton').attr('clicked', false);
+                                $(this).attr('clicked', true);
+                            };
+
+                            let getClickedSubmitBtn = function(form) {
+                                return $(form).find('input[type=submit][clicked=true]');
+                            };
+
+                            $('#addproduct input[type=submit]').click(setClickedSubmitBtn);
                             $('#addproduct').submit(submitForm);
                             // $('#cancellinebutton').click(cancelEdit);
 
