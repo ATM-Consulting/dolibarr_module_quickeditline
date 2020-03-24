@@ -261,9 +261,11 @@ class Actionsquickeditline
 
                             $('#addproduct').find('input[name=action]').val('updateline');
 
-                            $('#addproduct').submit(submitForm);
+
                         });
                     });
+
+					$('#addproduct').on('submit', submitForm);
                 });
             </script>
             <?php
