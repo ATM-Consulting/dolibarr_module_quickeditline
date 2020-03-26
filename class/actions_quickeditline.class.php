@@ -170,6 +170,7 @@ class Actionsquickeditline
                     });
 
                     let ajaxViewLine = function (ev) {
+                    	let line_id = $('#addproduct input[name=lineid]').val();
                         $.ajax({
                             url: "<?php echo dol_buildpath('quickeditline/script/interface.php', 1); ?>"
                             ,type: 'POST'
@@ -178,18 +179,18 @@ class Actionsquickeditline
                                 get: 'view-line'
                                 ,objectid: <?php echo $object->id; ?>
                                 ,objectelement: "<?php echo $object->element; ?>"
-                                ,lineid: $('#addproduct input[name=lineid]').val()
+                                ,lineid: line_id
                                 ,php_self: "<?php echo $_SERVER['PHP_SELF'].'?id='.$object->id; ?>"
                             }
                         }).done(function(html) {
                             // Remove extrafields lines
-                            $('#savelinebutton').closest('tr').nextUntil('tr[id^=row-]', 'tr').remove();
+							$('#savelinebutton').closest('tr').nextUntil('tr[id^=row-]', 'tr').remove();
 
-                            quickeditline_show_create_template();
+							quickeditline_show_create_template();
 
-                            $('#savelinebutton').closest('tr').replaceWith(html);
+							$('#savelinebutton').closest('tr').replaceWith(html);
 
-                            $('#addproduct').find('input[name=action]').val('addline');
+							$('#addproduct').find('input[name=action]').val('addline');
 
                             qlu_in_edition = false;
                         });
@@ -197,36 +198,40 @@ class Actionsquickeditline
                     };
 
                     let submitForm = function (ev) {
-                        ev.preventDefault();
-                        for (let ckeName in CKEDITOR.instances) {
-                            if (CKEDITOR.instances.hasOwnProperty(ckeName)) {
-                                let ckeInstance = CKEDITOR.instances[ckeName];
-                                let textarea = $(ckeInstance.element.$);
-                                textarea.val(ckeInstance.getData());
-                                // console.log(ckeName, textarea[0], ckeInstance.getData(), textarea[0].name);
-                            }
-                        }
+						if ($('#savelinebutton').val() != undefined)
+						{
+							ev.preventDefault();
+							for (let ckeName in CKEDITOR.instances) {
+								if (CKEDITOR.instances.hasOwnProperty(ckeName)) {
+									let ckeInstance = CKEDITOR.instances[ckeName];
+									let textarea = $(ckeInstance.element.$);
+									textarea.val(ckeInstance.getData());
+									// console.log(ckeName, textarea[0], ckeInstance.getData(), textarea[0].name);
+								}
+							}
 
-                        let data = {};
+							let data = {};
 
-                        let submitData = $(this).serializeArray();
-                        for (let i in submitData) {
-                            data[submitData[i].name] = submitData[i].value;
-                        }
+							let submitData = $(this).serializeArray();
+							for (let i in submitData) {
+								data[submitData[i].name] = submitData[i].value;
+							}
 
-                        if ($(ev.originalEvent).find('input[type=submit][clicked=true]').attr('name') === 'cancel') {
-                            return ajaxViewLine(ev);
-                        }
+							if ($(ev.originalEvent).find('input[type=submit][clicked=true]').attr('name') === 'cancel') {
+								return ajaxViewLine(ev);
+							}
 
-                        data.save = $('#savelinebutton').val()
+							data.save = $('#savelinebutton').val()
 
-                        $.ajax({
-                            url: $('#addproduct').attr('action')
-                            ,type: 'POST'
-                            ,data: data
-                        }).done(function() {
-                            ajaxViewLine(ev);
-                        });
+							$.ajax({
+								url: $('#addproduct').attr('action')
+								,type: 'POST'
+								,data: data
+							}).done(function() {
+								ajaxViewLine(ev);
+							});
+
+						}
                     };
 
                     let qlu_in_edition = false;
