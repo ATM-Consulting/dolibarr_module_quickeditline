@@ -1,5 +1,7 @@
 <?php
 
+if (! defined('NOTOKENRENEWAL')) define('NOTOKENRENEWAL', 1);
+
 	require('../config.php');
 	dol_include_once('/comm/propal/class/propal.class.php');
 	dol_include_once('/commande/class/commande.class.php');
